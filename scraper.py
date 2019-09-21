@@ -27,7 +27,7 @@ def soupify(html):
     to an HTML document or snippet which has been parsed and loaded into BeautifulSoup so that
     we can query what's inside of it with BeautifulSoup.
     """
-    return BeautifulSoup(html, "html.parser") 
+    return BeautifulSoup(html, "html.parser")
 
 
 def get_elements_with_class(soup, elt, cls):
@@ -36,11 +36,11 @@ def get_elements_with_class(soup, elt, cls):
     HTML contained in the soup argument.
 
     For example, get_elements_with_class(soup, 'a', 'navbar') will return all links
-    with the class "navbar". 
+    with the class "navbar".
 
     Important to know that each element in the list is itself a soup which can be
     queried with the BeautifulSoup API. It's turtles all the way down!
-    """ 
+    """
     return soup.findAll(elt, {'class': cls})
 
 def get_clubs(soup):
@@ -48,7 +48,8 @@ def get_clubs(soup):
     This function should return a list of soups with each soup corresponding to the html
     for a single club.
     """
-    return [] # TODO: Implement this function
+
+    return get_elements_with_class(soup, "div", "box")
 
 def get_club_name(club):
     """
@@ -65,11 +66,12 @@ def get_club_description(club):
     """
     Extract club description from a soup containing a single club.
     """
-    return '' # TODO: Implement this function
+    return club.em.text
 
 def get_club_tags(club):
     """
     Get the tag labels for all tags associated with a single club.
     """
-    return [] # TODO: Implement this function
 
+    tags = get_elements_with_class(club.div, "span", "tag")
+    return list(map(lambda x: x.text, tags))
