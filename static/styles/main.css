@@ -1,0 +1,58 @@
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+section#intro {
+  padding-top: 30px;
+  padding-bottom: 30px;
+
+  color: #FFFFFF;
+  /* background color taken from PennLabs website! */
+  background-color: RGB(70, 155, 231);
+}
+
+span#clubCount {
+  font-size: 22px;
+  font-weight: bold;
+  color: #49DDEE;
+}
+
+span#PennClubsTitle {
+  color: #CCCCCC;
+}
+
+section.club {
+  display: block;
+  width: 300px;
+  height: 300px;
+  margin: 25px;
+  float: left;
+  overflow: scroll;
+
+  padding: 15px;
+  border: 1px solid #DDDDDD;
+  border-radius: 15px;
+}
+
+section.club > section.clubTags {
+  margin-bottom: 5px;
+}
+
+section.club > section.clubTags > span.clubTag {
+  color: #FFFFFF;
+  /* background color taken from PennLabs website! */
+  background-color: RGB(70, 155, 231);
+
+  padding: 2px;
+  padding-left: 8px;
+  padding-right: 8px;
+  border: 1px solid #DDDDDD;
+  border-radius: 8px;
+  margin-bottom: 5px;
+}
+
+section.club > p.description {
+  padding: 10px;
+}
