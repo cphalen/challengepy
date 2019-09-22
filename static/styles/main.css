@@ -25,11 +25,10 @@ span#PennClubsTitle {
 
 section.club {
   display: block;
-  width: 300px;
+  width: 400px;
   height: 300px;
   margin: 25px;
   float: left;
-  overflow: scroll;
 
   padding: 15px;
   border: 1px solid #DDDDDD;
@@ -55,4 +54,13 @@ section.club > section.clubTags > span.clubTag {
 
 section.club > p.description {
   padding: 10px;
+  display: block;
+  height: 60%;
+  overflow: scroll;
+}
+
+.centered {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }

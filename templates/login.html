@@ -19,13 +19,9 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css') }}"></link>
-
-    <!-- jQuery CDN -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-            crossorigin="anonymous"></script>
   </head>
   <body>
+
     <!-- Navbar implemented from Bootstrap -->
     <section id="nav">
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -46,38 +42,34 @@
               <a class="nav-link" href="/login">Login</a>
             </li>
           </ul>
-          <div class="form-inline my-2 my-lg-0">
-            <input id="searchParameter" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button id="searchBtn" class="btn btn-outline-primary my-2 my-sm-0">Search</button>
-          </div>
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button id="searchBtn" class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+          </form>
         </div>
-        </nav>
-      </section>
+      </nav>
+    </section>
 
-      <section id="intro" class="row">
-        <section class="col-md-8 center text-center">
-          <h1>Welcome to <span id="PennClubsTitle">Penn Clubs Review</span>!</h1>
-          <h6>Here you can learn and review all of the <span id="clubCount">{{club_count}}</span> student clubs on campus!</h6>
-        </section>
-      </section>
-
-      <section id="clubs">
-        {% for club in clubs %}
-          <section class="club">
-            <h4>{{ club.name }}</h4>
-            <hr></hr>
-            <section class="clubTags">
-              {% for tag in club.tags %}
-                <span class="clubTag">{{ tag }}</span>
-              {% endfor %}
-            </section>
-            <p class="description">{{ club.description }}</p>
-          </section>
-        {% endfor %}
-      </section>
-
-    <!-- Custom JS -->
-    <script type="text/javascript" src="{{ url_for('static', filename='scripts/search.js') }}"></script>
-
+    <!-- Bootstrap form formatting -->
+    <div class="col-md-6 centered mt-4">
+      <form action="/api/login" method="post">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" class="form-control" id="username" name="username" placeholder="Ben_Franklin" required>
+          <small id="usernameHelp" class="form-text text-muted">We'll never share your information with anyone else.</small>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Log in</button>
+      </form>
+      <hr>
+      <div class="container col-md-8 centered">
+        <div class="row">
+          <a class="centered" href="/register">Create account</a>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

@@ -17,15 +17,16 @@
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css') }}"></link>
-
     <!-- jQuery CDN -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
             integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
             crossorigin="anonymous"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css') }}"></link>
   </head>
   <body>
+
     <!-- Navbar implemented from Bootstrap -->
     <section id="nav">
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -46,38 +47,43 @@
               <a class="nav-link" href="/login">Login</a>
             </li>
           </ul>
-          <div class="form-inline my-2 my-lg-0">
-            <input id="searchParameter" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button id="searchBtn" class="btn btn-outline-primary my-2 my-sm-0">Search</button>
-          </div>
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button id="searchBtn" class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+          </form>
         </div>
-        </nav>
-      </section>
+      </nav>
+    </section>
 
-      <section id="intro" class="row">
-        <section class="col-md-8 center text-center">
-          <h1>Welcome to <span id="PennClubsTitle">Penn Clubs Review</span>!</h1>
-          <h6>Here you can learn and review all of the <span id="clubCount">{{club_count}}</span> student clubs on campus!</h6>
-        </section>
-      </section>
-
-      <section id="clubs">
-        {% for club in clubs %}
-          <section class="club">
-            <h4>{{ club.name }}</h4>
-            <hr></hr>
-            <section class="clubTags">
-              {% for tag in club.tags %}
-                <span class="clubTag">{{ tag }}</span>
-              {% endfor %}
-            </section>
-            <p class="description">{{ club.description }}</p>
-          </section>
-        {% endfor %}
-      </section>
+    <div class="col-md-6 centered mt-4">
+      <form action="/api/submit" method="post">
+        <div class="form-group">
+          <label for="name">Club name</label>
+          <input type="text" class="form-control" id="name" name="name" placeholder="PennLabs" required>
+        </div>
+        <br>
+        <div class="form-group">
+          <label>Tags for club</label>
+          <input className="form-control" type="email" type="text" name="item" id="add"></input>
+          <input type="button" id="addbtn" name="addbtn" value="Add" class="btn btn-primary btn-sm"></input>
+          <hr></hr>
+          <ul id="tagList" name="tagList" class="list-group">
+          </ul>
+        </div>
+        <br>
+        <div class="form-group">
+          <label for="email">Club description</label>
+          <input type="text" class="form-control" id="description" name="description" placeholder="Team description" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Register club</button>
+      </form>
+      <br>
+      <div id="errorLog">
+      </div>
+    </div>
 
     <!-- Custom JS -->
-    <script type="text/javascript" src="{{ url_for('static', filename='scripts/search.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='scripts/tagList.js') }}"></script>
 
   </body>
 </html>
