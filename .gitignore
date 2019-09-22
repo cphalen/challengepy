@@ -1,3 +1,4 @@
 Pipfile.lock
 *.pyc
 main.db
+.DS_Store

@@ -43,7 +43,11 @@
               <a class="nav-link" href="/submit">Submit</a>
             </li>
             <li {% if location.login %} class="nav-item active" {% else %} class="nav-item" {% endif %}>
-              <a class="nav-link" href="/login">Login</a>
+                {% if user == None %}
+                  <a class="nav-link" href="/login">Login</a>
+                {% else %}
+                  <a class="nav-link" href="/api/logout">Logout</a>
+                {% endif %}
             </li>
           </ul>
           <div class="form-inline my-2 my-lg-0">
@@ -72,12 +76,18 @@
               {% endfor %}
             </section>
             <p class="description">{{ club.description }}</p>
+            {% if club.is_favorite %}
+              <button onclick="favoriteClub('{{ user }}', '{{ club.name }}')" class="favoriteClub btn btn-outline-primary my-2 my-sm-0">Unfavorite</button>
+            {% else %}
+              <button onclick="favoriteClub('{{ user }}', '{{ club.name }}')" class="favoriteClub btn btn-outline-primary my-2 my-sm-0">Favorite</button>
+            {% endif %}
           </section>
         {% endfor %}
       </section>
 
     <!-- Custom JS -->
     <script type="text/javascript" src="{{ url_for('static', filename='scripts/search.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='scripts/favorite.js') }}"></script>
 
   </body>
 </html>

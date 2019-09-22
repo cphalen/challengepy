@@ -17,6 +17,11 @@
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
 
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
+
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css') }}"></link>
   </head>
@@ -54,9 +59,8 @@
         </nav>
       </section>
 
-    <!-- Bootstrap form formatting -->
     <div class="col-md-6 centered mt-4">
-      <form action="/api/login" method="post">
+      <form action="/api/register" class="validatePassword" method="post">
         <div class="form-group">
           <label for="username">Username</label>
           <input type="text" class="form-control" id="username" name="username" placeholder="Ben_Franklin" required>
@@ -65,26 +69,18 @@
         <div class="form-group">
           <label for="password">Password</label>
           <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+          <br>
+          <label for="password">Verify password</label>
+          <input type="password" class="form-control" id="confirmPassword" oninput="checkPasswords(this);" placeholder="Confirm Password" required>
         </div>
-        <button type="submit" class="btn btn-primary">Log in</button>
+        <br>
+        <button type="submit" class="btn btn-primary">Sign up</button>
       </form>
-      <hr>
-      <div class="container col-md-8 centered">
-        <div class="row">
-          <a class="centered" href="/register">Create account</a>
-        </div>
-      </div>
-
       <br>
-
-      {% if try_again %}
-        <div class="alert alert-danger" role="alert">
-          Incorrect username or passsword. Please try again!
-        </div>
-      {% endif %}
-
     </div>
 
+    <!-- Custom JS -->
+    <script type="text/javascript" src="{{ url_for('static', filename='scripts/passwordValidation.js') }}"></script>
 
   </body>
 </html>
