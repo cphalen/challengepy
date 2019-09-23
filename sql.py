@@ -1,9 +1,10 @@
 from os import path # To check if db file exists
 from sqlalchemy import *
 import sys
+import bcrypt
 
 class Database:
-    def __init__(self, db_path, clubs_list):
+    def __init__(self, db_path, clubs_list=None):
         """
         Initialize SQL Alchemcy engine object that will store
         all of our SQL data.
@@ -15,7 +16,7 @@ class Database:
         self.connection   = self.engine.connect()
         self.metadata     = MetaData()
 
-        if (db_exists):
+        if (db_exists and clubs_list != None):
             self.initialize(clubs_list)
         else:
             self.clubs = Table('clubs',
@@ -88,8 +89,22 @@ class Database:
         )
 
         self.metadata.create_all(self.engine)
-        clubs_list = clubs_list
 
+        # Create jen's user account!
+        username   = "jen"
+        password   = "LennPabs".encode("utf-8")
+        salt       = bcrypt.gensalt()
+        hash       = bcrypt.hashpw(password, salt)
+        # Cannot store bytecode in SQL
+        str_salt   = salt.decode("utf-8")
+        str_hash   = hash.decode("utf-8")
+
+        query      = insert(self.users).values(username=username,
+                                               salt=str_salt,
+                                               hash=str_hash)
+        result     = self.connection.execute(query)
+
+        # Insert all legacy club data into initialied database
         for club in clubs_list:
             query   = insert(self.clubs).values(name=club.name,
                                                 description=club.description)
@@ -213,7 +228,7 @@ class Database:
 
     def get_tags_by_club(self, clubID):
         """
-        This actually is used when we print all new clubs to index.htmt.
+        This actually is used when we print all new clubs to index.html.
         We have to know what clubs are associated with each club when
         creating the template for the front-end club cards
         """

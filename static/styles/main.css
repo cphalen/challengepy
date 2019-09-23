@@ -53,6 +53,19 @@ section.club > section.clubTags > span.clubTag {
   margin-bottom: 5px;
 }
 
+span.welcomeTag {
+  color: #FFFFFF;
+  /* background color taken from PennLabs website! */
+  background-color: RGB(70, 155, 231);
+
+  padding: 2px;
+  padding-left: 8px;
+  padding-right: 8px;
+  border: 1px solid #DDDDDD;
+  border-radius: 8px;
+  margin-bottom: 5px;
+}
+
 section.club > p.description {
   padding: 10px;
   display: block;
