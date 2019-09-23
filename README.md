@@ -40,7 +40,7 @@ does not exist, you will be direct to `/register` to create an account.
 username: username
 password: password
 ```
-fairly straightfoward ;)
+fairly straightforward ;)
 
 #### api/register
 Here you can create a new user account. You only need to specify
@@ -56,6 +56,10 @@ likely get an error because `username` is the `primary key` in the table.
 #### api/logout
 By far my favorite API call in the entire program. Takes no parameters and
 simply logs a user out of the `session` variable if there is a user in there.
+
+#### api/current_user
+This call returns info about the current user provided there is a current
+user. If no user is logged in in this `session` then it just returns nothing.
 
 ### api/user/:username
 This API call returns user data for the user specified in the route parameter.
